@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RISE — Investor Pitch</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Georgia', serif;
+    background: #f5f5f0;
+    color: #1a1a2e;
+    line-height: 1.8;
+  }
+  .page {
+    max-width: 820px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 0;
+  }
+
+  /* ── Cover ── */
+  .cover {
+    background: linear-gradient(135deg, #0d0d1a 0%, #1a1040 100%);
+    padding: 120px 80px 100px;
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .cover-logo {
+    font-family: 'Arial', sans-serif;
+    font-size: 96px;
+    font-weight: 200;
+    letter-spacing: 18px;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+  .cover-logo span { color: #6366f1; }
+  .cover-tagline {
+    font-family: 'Arial', sans-serif;
+    font-size: 22px;
+    color: rgba(255,255,255,0.55);
+    font-style: italic;
+    margin-bottom: 60px;
+  }
+  .cover-divider {
+    width: 80px;
+    height: 3px;
+    background: #6366f1;
+    margin: 0 auto 50px;
+  }
+  .cover-callout {
+    background: rgba(99, 102, 241, 0.12);
+    border: 1px solid rgba(99,102,241,0.4);
+    border-radius: 12px;
+    padding: 28px 36px;
+    max-width: 600px;
+    margin: 0 auto 50px;
+  }
+  .cover-callout p {
+    font-family: 'Arial', sans-serif;
+    font-size: 17px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.7;
+    font-style: italic;
+  }
+  .cover-sub {
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .cover-brief {
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  /* ── Sections ── */
+  .section {
+    padding: 70px 80px;
+    border-bottom: 1px solid #eee;
+  }
+  .section:nth-child(even) { background: #fafafa; }
+  .section-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #6366f1;
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: 'Arial', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #0d0d1a;
+    line-height: 1.25;
+    margin-bottom: 24px;
+  }
+  h2 {
+    font-family: 'Arial', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #6366f1;
+    margin: 36px 0 12px;
+  }
+  p {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    color: #374151;
+    margin-bottom: 18px;
+    line-height: 1.8;
+  }
+  p strong { color: #0d0d1a; }
+  .divider {
+    height: 4px;
+    background: linear-gradient(90deg, #6366f1, #a5b4fc);
+    border-radius: 2px;
+    margin: 0 0 32px;
+  }
+
+  /* ── Callout ── */
+  .callout {
+    background: #eef2ff;
+    border-left: 4px solid #6366f1;
+    border-radius: 0 10px 10px 0;
+    padding: 22px 28px;
+    margin: 24px 0;
+  }
+  .callout p {
+    font-size: 17px;
+    font-weight: 600;
+    color: #3730a3;
+    margin: 0;
+    font-style: italic;
+  }
+
+  /* ── Stats row ── */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin: 28px 0;
+  }
+  .stat-box {
+    background: #eef2ff;
+    border-radius: 12px;
+    padding: 24px 16px;
+    text-align: center;
+  }
+  .stat-number {
+    font-family: 'Arial', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: #6366f1;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .stat-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    color: #6b7280;
+    line-height: 1.4;
+  }
+
+  /* ── Table ── */
+  .pitch-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+  }
+  .pitch-table th {
+    background: #6366f1;
+    color: #fff;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .pitch-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    color: #374151;
+    vertical-align: top;
+  }
+  .pitch-table tr:nth-child(even) td { background: #f9f9ff; }
+  .pitch-table td:first-child { font-weight: 600; color: #0d0d1a; }
+  .check { color: #059669; font-weight: 700; }
+  .cross { color: #d1d5db; }
+
+  /* ── Bullets ── */
+  ul.pitch-list {
+    margin: 12px 0 20px 20px;
+  }
+  ul.pitch-list li {
+    font-family: 'Arial', sans-serif;
+    font-size: 15px;
+    color: #374151;
+    margin-bottom: 8px;
+    line-height: 1.6;
+    padding-left: 6px;
+  }
+
+  /* ── Use of funds ── */
+  .funds-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+  .fund-box {
+    background: #f9f9ff;
+    border: 1px solid #e0e7ff;
+    border-radius: 12px;
+    padding: 22px;
+  }
+  .fund-percent {
+    font-family: 'Arial', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    color: #6366f1;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .fund-title {
+    font-family: 'Arial', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #0d0d1a;
+    margin-bottom: 8px;
+  }
+  .fund-desc {
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    color: #6b7280;
+    line-height: 1.5;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    background: #0d0d1a;
+    padding: 60px 80px;
+    text-align: center;
+  }
+  .footer-logo {
+    font-family: 'Arial', sans-serif;
+    font-size: 48px;
+    font-weight: 200;
+    letter-spacing: 10px;
+    color: #6366f1;
+    margin-bottom: 12px;
+  }
+  .footer-tagline {
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+    color: rgba(255,255,255,0.4);
+    font-style: italic;
+    margin-bottom: 24px;
+  }
+  .footer-conf {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    color: rgba(255,255,255,0.15);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 700px) {
+    .cover { padding: 60px 32px; }
+    .cover-logo { font-size: 64px; letter-spacing: 10px; }
+    .section { padding: 50px 32px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .funds-grid { grid-template-columns: 1fr; }
+    .footer { padding: 50px 32px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ══ COVER ══ -->
+  <div class="cover">
+    <div class="cover-logo">R<span>I</span>SE</div>
+    <div class="cover-tagline">The Alarm Clock That Actually Changes Your Life</div>
+    <div class="cover-divider"></div>
+    <div class="cover-callout">
+      <p>"Most people wake up the same way they did ten years ago. RISE is the first alarm clock designed to change that."</p>
+    </div>
+    <div class="cover-brief">An Investor Brief</div>
+    <div class="cover-sub">Confidential &nbsp;·&nbsp; March 2026</div>
+  </div>
+
+
+  <!-- ══ THE SIMPLE TRUTH ══ -->
+  <div class="section">
+    <div class="section-label">The Simple Truth</div>
+    <h1>Every morning is a fresh start.<br>Most people waste it.</h1>
+    <div class="divider"></div>
+    <p>There are over 2 billion smartphones on Earth. Almost every single one has an alarm clock on it. People set their alarm, it rings, they hit snooze — and repeat this same cycle for years.</p>
+    <p><strong>Nothing about that alarm clock is on their side.</strong></p>
+    <p>It does not care if they actually got up. It does not remember that they have been hitting snooze for 400 days straight. It does not know that they promised themselves this year would be different. It just rings. They just snooze. And the morning — the most powerful part of the day — disappears.</p>
+    <div class="callout">
+      <p>RISE is an alarm app that does not let you go back to sleep — and then helps you understand why you keep trying to.</p>
+    </div>
+    <p>That is the entire product, stated simply. But the technology behind it and the business it creates are genuinely large.</p>
+  </div>
+
+
+  <!-- ══ THE PROBLEM ══ -->
+  <div class="section">
+    <div class="section-label">The Problem We Solve</div>
+    <h1>Why do people keep hitting snooze?</h1>
+    <div class="divider"></div>
+    <p>Most people who download alarm apps are not looking for a louder alarm. They are looking for something that actually works — something that gets them up and keeps them up.</p>
+    <p><strong>The three real problems:</strong></p>
+    <table class="pitch-table">
+      <thead><tr><th>Problem</th><th>What It Feels Like</th></tr></thead>
+      <tbody>
+        <tr><td>No accountability</td><td>You can always just… hit snooze. Nothing happens. Nobody knows.</td></tr>
+        <tr><td>No consequences</td><td>The alarm has no memory. Yesterday's failure costs nothing today.</td></tr>
+        <tr><td>No understanding</td><td>People do not know WHY they cannot wake up. Bad sleep? Poor nutrition? Stress? They are guessing.</td></tr>
+      </tbody>
+    </table>
+    <p>Existing apps address the first two problems with tricks — math puzzles, shaking the phone, scanning a barcode. These work for a while, then people stop using them because the app still does not explain anything or genuinely care about their progress.</p>
+    <p>RISE solves all three. The alarm is hard to dismiss. The streak is hard to quit. And the understanding — the weekly and monthly AI-written insights into your own patterns — is something no other alarm app offers at all.</p>
+  </div>
+
+
+  <!-- ══ THE PRODUCT ══ -->
+  <div class="section">
+    <div class="section-label">The Product</div>
+    <h1>What RISE actually does</h1>
+    <div class="divider"></div>
+    <p>RISE is built around one core idea: waking up is not a single moment, it is a habit — and habits are built through accountability, identity, and understanding.</p>
+
+    <h2>Layer 1 — The Alarm That Holds You Accountable</h2>
+    <p>When your RISE alarm fires, you cannot dismiss it by pressing a button. You have to prove you are awake:</p>
+    <ul class="pitch-list">
+      <li>Complete a wake game (mathematics, memory, word puzzles) — difficulty set by you</li>
+      <li>Optional: place your finger on the camera for a heartbeat reading</li>
+      <li>15 minutes later, a follow-up check confirms you did not go back to sleep</li>
+      <li>If you do not confirm, your accountability buddy receives an automatic message</li>
+    </ul>
+
+    <h2>Layer 2 — The Life Tracking That Keeps You Going</h2>
+    <p>RISE quietly tracks the things that affect your mornings:</p>
+    <ul class="pitch-list">
+      <li>How long and how well you slept</li>
+      <li>What you ate and when — with full support for African, South Asian, Middle Eastern and global cuisines, not just Western foods</li>
+      <li>Your daily intentions and morning tasks</li>
+      <li>Your habit streak and consistency over time</li>
+    </ul>
+
+    <h2>Layer 3 — The AI That Explains You To Yourself</h2>
+    <p>This is what makes RISE genuinely different:</p>
+    <div class="callout">
+      <p>Every week, RISE writes you a personal review. Not a list of numbers and graphs — a real paragraph, in plain language, by an AI that has been watching your patterns. It tells you what it noticed, what the data suggests, and what to carry forward.</p>
+    </div>
+    <p>Every month, it writes you a letter. Addressed to you by name. About who you were this month based on what you actually did — not who you planned to be.</p>
+    <p><strong>This is the product people pay for.</strong> Everything else — the alarm, the streak, the games, the food tracker, the quotes, the goal journal — is free. Forever.</p>
+  </div>
+
+
+  <!-- ══ THE MARKET ══ -->
+  <div class="section">
+    <div class="section-label">The Market</div>
+    <h1>Who is this for?</h1>
+    <div class="divider"></div>
+    <p>The honest answer is: anyone with a smartphone and a morning they want to improve. But let us be specific.</p>
+    <div class="stats">
+      <div class="stat-box"><span class="stat-number">2.3B</span><span class="stat-label">Smartphone users who set alarms daily</span></div>
+      <div class="stat-box"><span class="stat-number">680M</span><span class="stat-label">Active wellness app users globally</span></div>
+      <div class="stat-box"><span class="stat-number">1.8B</span><span class="stat-label">Muslims globally — Ramadan-aware alarms</span></div>
+      <div class="stat-box"><span class="stat-number">$8.3B</span><span class="stat-label">Sleep & wellness app market by 2027</span></div>
+    </div>
+
+    <h2>Why Africa and the Global South Are Central, Not an Afterthought</h2>
+    <p>Most wellness apps are built for users in the United States and Western Europe. They assume English is your first language, that your food is in a Western database, and that your faith does not affect your morning routine.</p>
+    <p>RISE is built differently:</p>
+    <ul class="pitch-list">
+      <li>Nigerian jollof rice, Kenyan ugali, Ethiopian injera, Egyptian ful, Senegalese thiéboudienne — all in the calorie tracker with accurate nutritional data</li>
+      <li>Swahili, Hausa, and Amharic proverbs shown in their original language before the English translation</li>
+      <li>Ramadan mode: Suhoor and Iftar meal tracking, fasting hour monitoring, a "Ramadan Mubarak" banner</li>
+      <li>Faith-aware morning quotes across 10 traditions — including secular as a first-class choice</li>
+      <li>Prices set by country: what costs $9.99 in the US costs $2.49 in Nigeria</li>
+    </ul>
+    <p>Nigeria alone has over 100 million smartphone users. Ethiopia is the fastest-growing mobile market in Africa. These are real, large, paying audiences being ignored by every major competitor.</p>
+  </div>
+
+
+  <!-- ══ BUSINESS MODEL ══ -->
+  <div class="section">
+    <div class="section-label">How RISE Makes Money</div>
+    <h1>A simple, honest business model</h1>
+    <div class="divider"></div>
+    <p>RISE is free to use. Everything that helps you wake up and track your life is free. We make money from people who want to understand their patterns — and from discreet advertising to free users.</p>
+
+    <h2>Subscriptions — The Main Revenue</h2>
+    <table class="pitch-table">
+      <thead><tr><th>Plan</th><th>What It Adds — Beyond the Free Experience</th></tr></thead>
+      <tbody>
+        <tr><td>Free</td><td>Full alarm engine, wake games, sleep tracking, food tracker, goals, habit streaks, daily quotes, proof wall. Everything. Free forever.</td></tr>
+        <tr><td>Core — from $2.49/mo</td><td>Weekly AI review (the conversion trigger), full sleep history, sleep-nutrition pattern analysis</td></tr>
+        <tr><td>Pro — from $3.99/mo</td><td>Monthly personal letter, daily AI morning briefing, smart home integration (lights on before alarm), deeper analytics</td></tr>
+        <tr><td>Guardian — from $6.99/mo</td><td>Parent sets alarm for child. Child cannot dismiss it without proof. Parent gets notified. Everything in Pro included.</td></tr>
+      </tbody>
+    </table>
+    <p style="font-style:italic; color: #6b7280; font-size:14px;">Prices shown are for the lowest-income markets. In the US, UK, and Europe, these are $5.99, $9.99, and $16.99 respectively. The app detects which country you are in and sets the price automatically.</p>
+
+    <h2>The Conversion Mechanic That Actually Works</h2>
+    <p>Free users who have been using RISE for a week see the first paragraph of their weekly review in full. The rest is blurred out. One button: "See your full review."</p>
+    <p>This is not a generic sales pitch. It is their own data. Their own story. The first paragraph was already compelling enough to make them want the rest. Our projected conversion rate from this mechanic alone: <strong>8–12% of free users who see it.</strong></p>
+
+    <h2>Advertising — The Secondary Revenue</h2>
+    <p>One sponsor message per week, shown at the bottom of the weekly review screen, free users only, clearly labeled "Sponsored." Never in the morning ritual. Never intrusive.</p>
+    <p>We have intentionally left this revenue stream dark until the user base is large enough to approach brands directly. When we have 200,000+ active free users, we will offer a single, relevant sponsor placement at a flat monthly rate — clean, editorial, and worth something to the right brand.</p>
+  </div>
+
+
+  <!-- ══ THE NUMBERS ══ -->
+  <div class="section">
+    <div class="section-label">The Numbers</div>
+    <h1>What this looks like financially</h1>
+    <div class="divider"></div>
+    <p style="font-style:italic; color:#6b7280;">These projections are conservative. They assume modest acquisition and a free-to-paid conversion rate of 5–10% depending on market.</p>
+
+    <h2>Subscription Revenue Projections</h2>
+    <table class="pitch-table">
+      <thead><tr><th>Active Users</th><th>Paying Subscribers (7%)</th><th>Avg Monthly Revenue/Sub</th><th>Annual Revenue</th></tr></thead>
+      <tbody>
+        <tr><td>100,000</td><td>7,000</td><td>$5.40 blended</td><td>~$453,000</td></tr>
+        <tr><td>500,000</td><td>35,000</td><td>$5.40 blended</td><td>~$2.3M</td></tr>
+        <tr><td>2,000,000</td><td>140,000</td><td>$5.40 blended</td><td>~$9.1M</td></tr>
+        <tr><td>5,000,000</td><td>350,000</td><td>$5.40 blended</td><td>~$22.7M</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Advertising Revenue (once activated at scale)</h2>
+    <table class="pitch-table">
+      <thead><tr><th>Free Users</th><th>Weekly Summary Opens (40%)</th><th>Annual Ad Revenue (est.)</th></tr></thead>
+      <tbody>
+        <tr><td>500,000</td><td>200,000</td><td>~$200,000</td></tr>
+        <tr><td>2,000,000</td><td>800,000</td><td>~$830,000</td></tr>
+        <tr><td>5,000,000</td><td>2,000,000</td><td>~$2.3M</td></tr>
+        <tr><td>10,000,000</td><td>4,000,000</td><td>~$5.2M</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- ══ COMPETITIVE ══ -->
+  <div class="section">
+    <div class="section-label">Competitive Position</div>
+    <h1>Why RISE wins where others plateau</h1>
+    <div class="divider"></div>
+    <p>There are dozens of alarm apps. There are also many habit trackers, calorie counters, sleep trackers, and journal apps. RISE is the only product that is all of these things in one place, connected to each other, and with an AI that makes sense of the combination.</p>
+    <table class="pitch-table">
+      <thead><tr><th>Feature</th><th>RISE</th><th>Alarmy</th><th>Fabulous</th><th>Headspace</th></tr></thead>
+      <tbody>
+        <tr><td>Hard-to-dismiss alarm</td><td class="check">✓</td><td class="check">✓</td><td class="cross">—</td><td class="cross">—</td></tr>
+        <tr><td>Wake games + biometrics</td><td class="check">✓</td><td>Partial</td><td class="cross">—</td><td class="cross">—</td></tr>
+        <tr><td>Sleep tracking</td><td class="check">✓</td><td class="cross">—</td><td>Partial</td><td class="cross">—</td></tr>
+        <tr><td>Calorie + food tracker</td><td class="check">✓</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td></tr>
+        <tr><td>African & global food database</td><td class="check">✓</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td></tr>
+        <tr><td>Habit tracker + goal journal</td><td class="check">✓</td><td class="cross">—</td><td class="check">✓</td><td class="cross">—</td></tr>
+        <tr><td>AI weekly review (narrative)</td><td class="check">✓</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td></tr>
+        <tr><td>AI monthly personal letter</td><td class="check">✓</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td></tr>
+        <tr><td>Ramadan mode</td><td class="check">✓</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td></tr>
+        <tr><td>Smart home integration</td><td class="check">✓</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td></tr>
+        <tr><td>Accountability buddy system</td><td class="check">✓</td><td class="cross">—</td><td class="cross">—</td><td class="cross">—</td></tr>
+        <tr><td>Free forever (core features)</td><td class="check">✓</td><td class="cross">—</td><td class="cross">—</td><td>Partial</td></tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      <p>No other alarm app has an AI that writes you a personal review of your week. That feature alone is the reason people subscribe. Everything else is the reason they stay.</p>
+    </div>
+  </div>
+
+
+  <!-- ══ GUARDIAN ══ -->
+  <div class="section">
+    <div class="section-label">A Feature Worth Highlighting</div>
+    <h1>The Guardian Plan</h1>
+    <div class="divider"></div>
+    <p>One of the most underserved markets in the wellness app space is parents who want their children to actually get up for school. RISE's Guardian plan speaks directly to this:</p>
+    <ul class="pitch-list">
+      <li>A parent sets the alarm. The child cannot turn it off, change the difficulty, or delete it.</li>
+      <li>The child must complete a wake game to dismiss it. The parent is notified when the alarm fires and when it is dismissed.</li>
+      <li>If the child does not dismiss it within a set window, the parent receives an escalating alert.</li>
+      <li>The parent can see the child's wake game results over time.</li>
+    </ul>
+    <p>At $6.99–$16.99 per month, this is the highest-value plan in the lineup. Parents pay for peace of mind. The product genuinely delivers it.</p>
+    <p>This segment is largely untouched by every competitor in the market. It is a clear, paying, motivated audience with a real problem that RISE solves completely.</p>
+  </div>
+
+
+  <!-- ══ BUILD STATUS ══ -->
+  <div class="section">
+    <div class="section-label">Build Status</div>
+    <h1>Where we are today</h1>
+    <div class="divider"></div>
+    <p>RISE has a complete technical blueprint spanning 12 detailed engineering documents and approximately 190 individual code files. This is not a concept — it is a fully specified, developer-ready product.</p>
+    <table class="pitch-table">
+      <thead><tr><th>Component</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Alarm engine (5-layer failsafe)</td><td class="check">Blueprint complete — ready to build</td></tr>
+        <tr><td>Biometric verification (heartbeat + face)</td><td class="check">Blueprint complete</td></tr>
+        <tr><td>Sleep detection & quality scoring</td><td class="check">Blueprint complete</td></tr>
+        <tr><td>Wake games (5 games, adaptive difficulty)</td><td class="check">Blueprint complete</td></tr>
+        <tr><td>Goals journal + habit tracker</td><td class="check">Blueprint complete</td></tr>
+        <tr><td>AI weekly review & monthly letter</td><td class="check">Blueprint complete</td></tr>
+        <tr><td>Calorie tracker (global food database)</td><td class="check">Blueprint complete</td></tr>
+        <tr><td>Quotes system (7 categories, original languages)</td><td class="check">Blueprint complete</td></tr>
+        <tr><td>Onboarding (3 modes including Assisted)</td><td class="check">Blueprint complete</td></tr>
+        <tr><td>Payments (Flutterwave + Stripe, 4 regional tiers)</td><td class="check">Blueprint complete</td></tr>
+        <tr><td>Smart home integration (Hue, LIFX, SwitchBot)</td><td class="check">Blueprint complete</td></tr>
+        <tr><td>Guardian plan (parent-child alarms)</td><td class="check">Blueprint complete</td></tr>
+      </tbody>
+    </table>
+    <p>We are seeking investment to move from blueprint to live users. The engineering work is estimated at 3–4 months for a small, experienced Flutter team.</p>
+  </div>
+
+
+  <!-- ══ THE ASK ══ -->
+  <div class="section">
+    <div class="section-label">The Investment Opportunity</div>
+    <h1>What we are asking for and why</h1>
+    <div class="divider"></div>
+    <p>We are raising a seed round. The primary use of funds is user acquisition — getting RISE in front of the people who need it most.</p>
+
+    <h2>How the money gets used</h2>
+    <div class="funds-grid">
+      <div class="fund-box">
+        <span class="fund-percent">60%</span>
+        <div class="fund-title">User Acquisition</div>
+        <div class="fund-desc">Paid campaigns on Meta, TikTok, and YouTube targeting morning routine, self-improvement, and faith-based audiences. This is the primary focus.</div>
+      </div>
+      <div class="fund-box">
+        <span class="fund-percent">25%</span>
+        <div class="fund-title">Engineering</div>
+        <div class="fund-desc">Development team to build RISE from the complete blueprint to App Store release on iOS and Android.</div>
+      </div>
+      <div class="fund-box">
+        <span class="fund-percent">10%</span>
+        <div class="fund-title">Operations & Infrastructure</div>
+        <div class="fund-desc">Firebase, servers, payment processing, Anthropic API for AI reviews, and customer support tooling.</div>
+      </div>
+      <div class="fund-box">
+        <span class="fund-percent">5%</span>
+        <div class="fund-title">Legal & Compliance</div>
+        <div class="fund-desc">App store compliance, payment regulations across markets, and basic IP protection.</div>
+      </div>
+    </div>
+
+    <h2>Why ads are the right use of this capital</h2>
+    <p>RISE does not need to convince people they have a morning problem. They already know. Millions of people search for "how to stop hitting snooze" and "best alarm app" every single month.</p>
+    <p>Paid acquisition in this space converts at high rates because the audience self-selects. Someone watching a 30-second video about an alarm that makes you prove you are awake is already the right person for this product. They do not need to be persuaded — they need to see that RISE exists.</p>
+    <p>Once a user installs RISE and experiences their first wake game, their first streak, their first weekly review preview — the product sells itself. Retention data on competing apps that use wake games shows 30-day retention of 40–60%, compared to 5–10% for standard alarm apps.</p>
+  </div>
+
+
+  <!-- ══ WHY NOW ══ -->
+  <div class="section">
+    <div class="section-label">Why Now</div>
+    <h1>The timing is right</h1>
+    <div class="divider"></div>
+
+    <h2>1. AI is now affordable enough to personalise at scale</h2>
+    <p>A year ago, generating a personalised 400-word weekly review for millions of users would have been prohibitively expensive. Today, with the latest generation of AI models, it costs pennies per user per week. The unit economics finally work.</p>
+
+    <h2>2. African mobile markets are at an inflection point</h2>
+    <p>Nigeria, Kenya, Ethiopia, Ghana, and South Africa are all seeing rapid growth in smartphone adoption and mobile payments. Flutterwave and similar services now make it practical to accept subscription payments in local currencies. This market has never been served by a premium wellness app built with them in mind. RISE is that app.</p>
+
+    <h2>3. The self-improvement app market is large but stale</h2>
+    <p>Headspace, Calm, and Fabulous have all raised hundreds of millions of dollars and built large user bases — but none of them touch the alarm. The alarm is where the day actually starts. Nobody owns that moment with the depth RISE brings.</p>
+  </div>
+
+
+  <!-- ══ CLOSE ══ -->
+  <div class="section">
+    <div class="section-label">Next Steps</div>
+    <h1>Let's talk</h1>
+    <div class="divider"></div>
+    <p>If you have read this far and you feel what we feel — that this is a real product, a real market, and a real opportunity — we would like to speak with you.</p>
+    <p>We are happy to share:</p>
+    <ul class="pitch-list">
+      <li>The complete 12-part technical blueprint (190+ files, fully specified)</li>
+      <li>A detailed financial model with multiple growth scenarios</li>
+      <li>A product walkthrough of the key user flows</li>
+      <li>Our proposed go-to-market sequencing by region</li>
+    </ul>
+    <div class="callout" style="margin-top:32px;">
+      <p>The alarm clock market has not been meaningfully innovated in 15 years. RISE changes that. We are not building a better alarm. We are building the first alarm that genuinely cares whether your life is going in the right direction.</p>
+    </div>
+    <p style="margin-top:24px;">RISE is not looking for the largest cheque. We are looking for an investor who understands that the people most in need of a great morning — a disciplined, intentional, conscious morning — are not only in San Francisco.</p>
+  </div>
+
+
+  <!-- ══ FOOTER ══ -->
+  <div class="footer">
+    <div class="footer-logo">RISE</div>
+    <div class="footer-tagline">Wake up on purpose.</div>
+    <div class="footer-conf">Confidential · Not for distribution · March 2026</div>
+  </div>
+
+</div>
+</body>
+</html>

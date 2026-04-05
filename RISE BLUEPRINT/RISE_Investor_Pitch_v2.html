@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RISE — Why We Built This</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1410;
+    --warm: #f7f3ee;
+    --accent: #c8510a;
+    --gold: #e8a020;
+    --muted: #7a6e65;
+    --border: #e0d8cf;
+    --deep: #2d1f0e;
+    --highlight: #fff8f0;
+    --green: #2d6a4f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--warm);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+  }
+
+  /* ── COVER ─────────────────────────────────────────────────── */
+  .cover {
+    min-height: 100vh;
+    background: var(--deep);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 64px 72px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(200,81,10,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(232,160,32,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cover-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .cover-wordmark {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 8px;
+    text-transform: uppercase;
+  }
+
+  .cover-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding-top: 4px;
+  }
+
+  .cover-center {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 0 40px;
+  }
+
+  .cover-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .cover-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(44px, 7vw, 80px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.05;
+    margin-bottom: 32px;
+    max-width: 760px;
+  }
+
+  .cover-headline em {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .cover-sub {
+    font-size: 18px;
+    color: rgba(255,255,255,0.5);
+    max-width: 520px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .cover-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 48px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .cover-note {
+    font-size: 13px;
+    color: rgba(255,255,255,0.25);
+    font-weight: 300;
+  }
+
+  .cover-scroll {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cover-scroll::after {
+    content: '↓';
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(4px); }
+  }
+
+  /* ── LAYOUT ────────────────────────────────────────────────── */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  .section {
+    padding: 96px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section:last-child { border-bottom: none; }
+
+  /* ── TYPOGRAPHY ────────────────────────────────────────────── */
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.15;
+    margin-bottom: 32px;
+  }
+
+  h2 em {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 48px 0 16px;
+    line-height: 1.3;
+  }
+
+  p {
+    font-size: 17px;
+    color: #3d3530;
+    margin-bottom: 20px;
+    line-height: 1.85;
+    font-weight: 300;
+  }
+
+  p strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  p em {
+    font-style: italic;
+    color: var(--muted);
+  }
+
+  /* ── PULL QUOTE ────────────────────────────────────────────── */
+  .pull-quote {
+    border-left: 3px solid var(--accent);
+    padding: 8px 0 8px 32px;
+    margin: 40px 0;
+  }
+
+  .pull-quote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.5;
+    margin: 0;
+    font-weight: 400;
+  }
+
+  /* ── SCENE BOX ─────────────────────────────────────────────── */
+  .scene {
+    background: var(--ink);
+    border-radius: 16px;
+    padding: 40px 48px;
+    margin: 36px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scene::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(200,81,10,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .scene-time {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .scene p {
+    color: rgba(255,255,255,0.75);
+    font-size: 16px;
+    margin-bottom: 14px;
+    line-height: 1.8;
+  }
+
+  .scene p:last-child { margin: 0; }
+
+  .scene p strong {
+    color: #fff;
+  }
+
+  /* ── STAT STRIP ────────────────────────────────────────────── */
+  .stat-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin: 40px 0;
+    background: var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .stat-item {
+    background: #fff;
+    padding: 32px 28px;
+    text-align: center;
+  }
+
+  .stat-item:first-child { border-radius: 16px 0 0 16px; }
+  .stat-item:last-child { border-radius: 0 16px 16px 0; }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px;
+    font-weight: 900;
+    color: var(--accent);
+    display: block;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* ── INSIGHT CARD ──────────────────────────────────────────── */
+  .insight {
+    background: var(--highlight);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 36px 40px;
+    margin: 32px 0;
+  }
+
+  .insight-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .insight p {
+    font-size: 16px;
+    margin: 0;
+    color: #3d3530;
+  }
+
+  /* ── COMPARISON ────────────────────────────────────────────── */
+  .comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 32px 0;
+  }
+
+  .comp-card {
+    border-radius: 14px;
+    padding: 28px 28px;
+    border: 1px solid var(--border);
+  }
+
+  .comp-card.them {
+    background: #fafafa;
+  }
+
+  .comp-card.us {
+    background: var(--deep);
+    border-color: transparent;
+  }
+
+  .comp-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .comp-card.them .comp-label { color: var(--muted); }
+  .comp-card.us .comp-label { color: var(--accent); }
+
+  .comp-card.them p { color: #7a6e65; font-size: 15px; }
+  .comp-card.us p { color: rgba(255,255,255,0.75); font-size: 15px; }
+  .comp-card.us p strong { color: #fff; }
+
+  /* ── TIER CARDS ────────────────────────────────────────────── */
+  .tiers {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 32px 0;
+  }
+
+  .tier-card {
+    border-radius: 14px;
+    padding: 24px 20px;
+    border: 1px solid var(--border);
+    background: #fff;
+  }
+
+  .tier-card.featured {
+    background: var(--deep);
+    border-color: transparent;
+  }
+
+  .tier-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .tier-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+    display: block;
+    line-height: 1;
+  }
+
+  .tier-card.featured .tier-price { color: #fff; }
+
+  .tier-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .tier-card.featured .tier-sub { color: rgba(255,255,255,0.4); }
+
+  .tier-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .tier-card.featured .tier-desc { color: rgba(255,255,255,0.6); }
+
+  /* ── MONEY TABLE ───────────────────────────────────────────── */
+  .money-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 28px 0;
+    font-size: 15px;
+  }
+
+  .money-table thead tr {
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .money-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 10px 16px 14px;
+    text-align: left;
+    font-weight: 400;
+  }
+
+  .money-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    color: #3d3530;
+    font-weight: 300;
+  }
+
+  .money-table td:first-child {
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .money-table td.highlight {
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .money-table tr:last-child td { border-bottom: none; }
+
+  /* ── REASONS ───────────────────────────────────────────────── */
+  .reasons {
+    counter-reset: reasons;
+    margin: 20px 0;
+  }
+
+  .reason {
+    counter-increment: reasons;
+    padding: 28px 0 28px 72px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .reason:last-child { border-bottom: none; }
+
+  .reason::before {
+    content: counter(reasons, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 28px;
+    font-family: 'DM Mono', monospace;
+    font-size: 28px;
+    color: var(--border);
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .reason h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+
+  .reason p { margin: 0; font-size: 16px; }
+
+  /* ── FUND SPLIT ────────────────────────────────────────────── */
+  .fund-split {
+    margin: 32px 0;
+  }
+
+  .fund-row {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    align-items: center;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .fund-row:last-child { border-bottom: none; }
+
+  .fund-pct {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .fund-bar-wrap {
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .fund-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+    border-radius: 3px;
+  }
+
+  .fund-name {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+
+  .fund-note {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .fund-label-col { }
+
+  /* ── CLOSING ───────────────────────────────────────────────── */
+  .closing {
+    background: var(--deep);
+    padding: 96px 72px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .closing::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(200,81,10,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .closing-wordmark {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.08);
+    letter-spacing: 20px;
+    margin-bottom: -40px;
+    display: block;
+  }
+
+  .closing-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 4vw, 48px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 24px;
+    position: relative;
+  }
+
+  .closing-headline em { color: var(--accent); font-style: italic; }
+
+  .closing p {
+    color: rgba(255,255,255,0.5);
+    font-size: 17px;
+    max-width: 560px;
+    margin: 0 auto 20px;
+    font-weight: 300;
+  }
+
+  .closing-divider {
+    width: 48px;
+    height: 2px;
+    background: var(--accent);
+    margin: 40px auto;
+  }
+
+  .closing-conf {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.15);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  /* ── AFRICA SPECIAL ────────────────────────────────────────── */
+  .africa-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 32px 0;
+  }
+
+  .africa-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 24px 24px;
+    border: 1px solid var(--border);
+  }
+
+  .africa-flag {
+    font-size: 24px;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .africa-country {
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+
+  .africa-detail {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ── RESPONSIVE ────────────────────────────────────────────── */
+  @media (max-width: 720px) {
+    .cover { padding: 40px 32px; }
+    .container { padding: 0 24px; }
+    .section { padding: 64px 0; }
+    .stat-strip { grid-template-columns: 1fr; border-radius: 16px; gap: 2px; }
+    .stat-item { border-radius: 0; }
+    .stat-item:first-child { border-radius: 16px 16px 0 0; }
+    .stat-item:last-child { border-radius: 0 0 16px 16px; }
+    .comparison { grid-template-columns: 1fr; }
+    .tiers { grid-template-columns: 1fr 1fr; }
+    .africa-grid { grid-template-columns: 1fr; }
+    .fund-row { grid-template-columns: 60px 1fr; }
+    .fund-bar-wrap { display: none; }
+    .closing { padding: 64px 32px; }
+    .scene { padding: 28px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     COVER
+══════════════════════════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-top">
+    <span class="cover-wordmark">RISE</span>
+    <span class="cover-tag">Investor Brief · March 2026 · Confidential</span>
+  </div>
+
+  <div class="cover-center">
+    <span class="cover-eyebrow">The opportunity nobody took seriously</span>
+    <h1 class="cover-headline">
+      Two billion people wake up tomorrow.<br>
+      <em>Almost none of them</em> will have a good morning.
+    </h1>
+    <p class="cover-sub">RISE is the app that changes what happens in the first hour of the day — and turns that into a real business with remarkable staying power.</p>
+  </div>
+
+  <div class="cover-bottom">
+    <span class="cover-note">Written for people who ask hard questions and deserve straight answers.</span>
+    <span class="cover-scroll">Scroll to read</span>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     THE HONEST OPENING
+══════════════════════════════════════════════════════════ -->
+<div class="container">
+<section class="section">
+  <span class="eyebrow">Before the pitch</span>
+  <h2>Let me tell you something<br><em>you already know</em></h2>
+
+  <p>You have hit snooze. I have hit snooze. Almost every adult on Earth has hit snooze. Not because we are lazy — but because the alarm is a completely brainless tool that rings and then forgets you exist.</p>
+
+  <p>Now here is what nobody says out loud: <strong>the way you wake up shapes your entire day.</strong> Not metaphorically. Physically. A morning where you snooze three times and scramble out the door is measurably worse — your cortisol is spiked, your focus is fractured, and your relationship with yourself is slightly damaged. You promised you would get up. You didn't. Again.</p>
+
+  <div class="pull-quote">
+    <p>"There is a product category worth billions that nobody has properly built yet. It's not a meditation app. It's not a sleep tracker. It's something that actually changes what happens when the alarm goes off."</p>
+  </div>
+
+  <p>That is what RISE is. And I want to walk you through why we believe it is one of the clearest opportunities in consumer wellness right now — not because the market is big (though it is), but because <strong>the existing products are genuinely, almost embarrassingly bad</strong> at the thing that matters most.</p>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     THE MORNING SCENE
+══════════════════════════════════════════════════════════ -->
+<section class="section">
+  <span class="eyebrow">Picture this</span>
+  <h2>This morning. <em>Millions</em> of them.</h2>
+
+  <div class="scene">
+    <span class="scene-time">6:00 AM · Tuesday</span>
+    <p>Emeka, 29, Lagos. Alarm rings. He grabs his phone, dismisses it in under two seconds without opening his eyes, and falls back asleep.</p>
+    <p>By 6:45 he is awake but rushed. He skips breakfast because there is no time. He does not track what he eats. He had a goal to work out three mornings a week — this is the fourth week in a row he hasn't. His streak app says Day 0 again.</p>
+    <p>Nobody knows. Nobody said anything. The alarm certainly didn't.</p>
+    <p><strong>This is not a character flaw. This is a system failure.</strong> And Emeka's phone — which costs more than his monthly rent — did absolutely nothing to help him.</p>
+  </div>
+
+  <p>Now imagine a different morning. Same Emeka. But this time his alarm fires and a <strong>wake game starts immediately</strong> — not optional, not dismissable with a tap. His heartbeat is read. A follow-up check arrives 15 minutes later. His accountability buddy in Abuja gets a message if he goes quiet.</p>
+
+  <p>More importantly: at the end of the week, RISE writes him a personal paragraph. Not a chart. Not a dashboard. A paragraph. In plain language. About his week — his sleep patterns, his habits, what it noticed, what to try next.</p>
+
+  <p>That is the product. And that paragraph — 400 words of genuine insight written just for him — is what he pays for.</p>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     THE REAL COST
+══════════════════════════════════════════════════════════ -->
+<section class="section">
+  <span class="eyebrow">The real cost</span>
+  <h2>What Emeka's snooze habit<br>actually <em>cost him</em></h2>
+
+  <p>We said Emeka missed his morning. Let us be specific about what that means over time — because this is the number that changes how you see the market.</p>
+
+  <div class="scene">
+    <span class="scene-time">The bill — 6 months of snoozing</span>
+    <p>Emeka had a goal: wake at 6am, work out three mornings a week, eat a proper breakfast, arrive at work sharp. He set that goal in January.</p>
+    <p><strong>By June, he had worked out 11 times instead of 72.</strong> He had skipped breakfast on 89 mornings, eating whatever was fast instead. He had arrived at work late — or at least flustered — more mornings than he arrived calm. His manager noticed. His promotion conversation was pushed back.</p>
+    <p>He also started a side business in January. The plan was to work on it from 6:00–7:30 every morning before the day started. <strong>He worked on it for a total of 14 mornings.</strong> The side business is still "in progress."</p>
+    <p>Emeka is not undisciplined. He is unequipped. The alarm he uses was designed in 1968. <strong>Nobody built him a better one.</strong></p>
+  </div>
+
+  <p>Now put a number on it. If Emeka's promotion was worth ₦2M more per year, and the snooze habit cost him six months of delay, that is ₦1M in lost earnings — from a phone app that rings and forgets him. If his side business had launched on schedule, the opportunity cost is real and personal.</p>
+
+  <div class="pull-quote">
+    <p>"The snooze button is not a small thing. It is a vote, cast every morning, for the version of yourself that stays small. Millions of people cast that vote every day because nobody gave them a better option."</p>
+  </div>
+
+  <p>This is why RISE's market is not "people who want a better alarm." It is <strong>people who know their mornings are costing them something</strong> — and would pay real money to stop the bleeding. That is a much larger, much more motivated audience.</p>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     MONEY ON THE LINE
+══════════════════════════════════════════════════════════ -->
+<section class="section">
+  <span class="eyebrow">The feature nobody else has built</span>
+  <h2>What if missing your alarm<br>cost you <em>actual money?</em></h2>
+
+  <p>Here is the feature that makes RISE genuinely unlike anything else on the market. When setting an alarm, a user can choose to put real money on the line.</p>
+
+  <div class="scene">
+    <span class="scene-time">How it works</span>
+    <p>Emeka sets his alarm for 6:00am. Before confirming, he chooses: <strong>"Add a stake."</strong></p>
+    <p>He enters ₦2,000. He links it to his account via BVN — Nigeria's Bank Verification Number, the identity layer that connects every Nigerian bank account. He chooses what happens if he does not wake up: <strong>the money goes to a charity of his choice.</strong></p>
+    <p>Or — if he has a friend who also uses RISE — it goes directly to them. A friendly bet between two people who both want to wake up early.</p>
+    <p>The alarm fires. He completes the wake game. His money stays in his wallet. He did it.</p>
+    <p><strong>Tomorrow, he will not snooze.</strong> Not because of willpower. Because ₦2,000 is on the line and it is his.</p>
+  </div>
+
+  <p>This is behavioural economics applied to the morning. Research from Dan Ariely, Richard Thaler, and the broader loss-aversion literature is unambiguous: <strong>people work twice as hard to avoid losing money they already have than to gain the same amount.</strong> A ₦2,000 loss feels worse than a ₦2,000 gain feels good. RISE weaponises that asymmetry for the user's benefit.</p>
+
+  <div class="insight">
+    <span class="insight-icon">🏦</span>
+    <p><strong>The BVN integration is what makes this real for Nigeria specifically.</strong> BVN (Bank Verification Number) is a biometric-linked identity system that connects to every Nigerian bank account. It means the stake is genuinely connected to real money — not a fake in-app token. For Kenya, M-Pesa plays the same role. For South Africa, it is linked bank accounts. This feature works precisely because African mobile banking infrastructure is now sophisticated enough to support it. Western app developers have not noticed this yet.</p>
+  </div>
+
+  <p>The charity options are curated and trusted — verified organisations working in health, education, and food security across the user's country. The user chooses their cause during setup. When they miss an alarm with a stake on it, the donation is automatic, instant, and receipted. <strong>They get a notification: "Your ₦2,000 went to [charity]. Don't let it happen again."</strong></p>
+
+  <p>This feature does not need to be used by every RISE user to be enormously valuable. It needs to be used by the <em>committed</em> ones — the people who are serious enough about changing their mornings to put skin in the game. Those users are exactly the ones most likely to subscribe, refer friends, and stay forever.</p>
+
+  <div class="stat-strip">
+    <div class="stat-item">
+      <span class="stat-num">2×</span>
+      <span class="stat-label">how much more motivated people are by potential loss vs. equivalent gain (loss aversion research)</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">87%</span>
+      <span class="stat-label">of people who put money on a behaviour goal achieve it, vs. 33% who do not (stickK.com research)</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">0</span>
+      <span class="stat-label">competitor alarm apps that offer real financial consequences for missing an alarm</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     BEDTIME ALARM + FREQUENCIES
+══════════════════════════════════════════════════════════ -->
+<section class="section">
+  <span class="eyebrow">The other half of the equation</span>
+  <h2>RISE does not just<br>wake you up. <em>It puts you to bed.</em></h2>
+
+  <p>Every alarm app in the world starts at the moment you need to wake up. RISE starts the night before.</p>
+
+  <p>When you set your wake time, RISE works backwards. Based on your sleep goal, your chronotype (whether you are naturally a morning person or night owl), and your recent sleep data, it calculates exactly when you need to stop looking at your phone and go to sleep. Then it tells you. With an alarm.</p>
+
+  <div class="comparison">
+    <div class="comp-card them">
+      <span class="comp-label">Every other alarm app</span>
+      <p>Sets a wake-up alarm. You decide when to sleep. You scroll until 1am. You wonder why waking up at 6am feels impossible.</p>
+    </div>
+    <div class="comp-card us">
+      <span class="comp-label">RISE</span>
+      <p><strong>"It's 10:15pm. To reach your 7-hour sleep goal and wake well at 6am, you need to put the phone down now."</strong> Then, as you settle, the frequency begins.</p>
+    </div>
+  </div>
+
+  <h3>The sleep frequency — and why it matters</h3>
+
+  <p>This is the part that sounds unusual until you understand the science. RISE plays a specific low-frequency audio tone as you settle to sleep — in the delta range (0.5–4 Hz), delivered as binaural beats. Your brain, through a process called entrainment, gradually synchronises its electrical activity with the frequency it is hearing. Delta brainwaves are the brainwave state of deep sleep. The audio guides you there faster.</p>
+
+  <p>More importantly for waking up: <strong>RISE begins shifting the frequency upward 20–30 minutes before your alarm fires.</strong> From delta, toward theta (4–8 Hz, light sleep), then toward alpha (8–12 Hz, relaxed wakefulness). By the time the alarm sounds, your brain is already on its way up. You are not being yanked from the bottom of a sleep cycle. You are meeting the alarm on your way to the surface.</p>
+
+  <div class="insight">
+    <span class="insight-icon">🎵</span>
+    <p>This is not sleep music. Sleep music helps people relax. What RISE plays is a <strong>precision tool for sleep state management</strong> — going down at bedtime, coming up before the alarm. Calm sells comfort. RISE sells a smarter morning, engineered from the night before. These are entirely different products.</p>
+  </div>
+
+  <p>The result is that RISE users who use the full system — bedtime alarm, sleep frequency, wake-up frequency ramp, then the alarm — report waking up feeling qualitatively different. Not just awake, but ready. That is a meaningful and shareable product experience. It is the thing people tell their friends about.</p>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     WHY THIS WORKS
+══════════════════════════════════════════════════════════ -->
+<section class="section">
+  <span class="eyebrow">The psychology</span>
+  <h2>Why people <em>actually</em> pay<br>for wellness apps</h2>
+
+  <p>Here is something worth understanding about consumer wellness: <strong>people do not pay for features. They pay for feelings.</strong> Specifically, they pay to feel seen, understood, and like they are making progress on something that matters to them.</p>
+
+  <p>That is why Spotify Wrapped goes viral every year. Not because it is useful — but because it holds up a mirror and says <em>"this is who you were this year."</em> People share it because being understood feels good.</p>
+
+  <div class="comparison">
+    <div class="comp-card them">
+      <span class="comp-label">What alarm apps currently give you</span>
+      <p>A louder sound. Maybe a maths puzzle. No memory. No context. No understanding of who you are or where you are trying to go. The same experience on Day 1 and Day 365.</p>
+    </div>
+    <div class="comp-card us">
+      <span class="comp-label">What RISE gives you</span>
+      <p><strong>A weekly letter about your own life.</strong> Written by an AI that has been watching your sleep, your food, your habits, your intentions. It remembers. It notices. It tells you the truth — warmly.</p>
+    </div>
+  </div>
+
+  <p>The weekly review is not a feature. <strong>It is the product.</strong> Everything else — the alarm engine, the wake games, the calorie tracker, the goal journal, the habit streaks — is free, and it is the reason people have data worth reviewing.</p>
+
+  <div class="insight">
+    <span class="insight-icon">🔑</span>
+    <p>The business model is deliberately generous. <strong>Give people an alarm they cannot dismiss without effort. Give them tracking tools that serve their real life. Give them a streak worth protecting.</strong> Then, after a week of real use, show them the first paragraph of their personal review — and blur the rest. The conversion mechanic is not a dark pattern. It is just very honest: <em>"You have been doing real things. Here is what we noticed. If you want the full picture, it's £4.99 a month."</em></p>
+  </div>
+
+  <p>Our projected conversion rate from users who see that preview: <strong>8–12%.</strong> That number is grounded in how Spotify, Duolingo, and Headspace all convert — but with one important difference: RISE's preview is about the user's own data, which makes it almost impossible to ignore.</p>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     THE MARKET NOBODY IS SERVING
+══════════════════════════════════════════════════════════ -->
+<section class="section">
+  <span class="eyebrow">The market</span>
+  <h2>The audience that every<br>competitor is <em>ignoring</em></h2>
+
+  <div class="stat-strip">
+    <div class="stat-item">
+      <span class="stat-num">2.3B</span>
+      <span class="stat-label">people who set an alarm on their phone every single night</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">1.8B</span>
+      <span class="stat-label">Muslims worldwide — none of whom have a Ramadan-aware alarm app</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">$8.3B</span>
+      <span class="stat-label">sleep and wellness app market by 2027, growing 14% annually</span>
+    </div>
+  </div>
+
+  <h3>Why Africa is the strategic centre of this product</h3>
+
+  <p>Every major wellness app in the world was designed in California. They assume your food is in an American database, your language is English, your faith does not affect your morning, and you can afford $12.99 a month without thinking.</p>
+
+  <p>None of that is true for the majority of the world's smartphone users. And the numbers show it — these are the fastest-growing mobile markets on Earth, and nobody has built for them properly.</p>
+
+  <div class="africa-grid">
+    <div class="africa-card">
+      <span class="africa-flag">🇳🇬</span>
+      <div class="africa-country">Nigeria</div>
+      <div class="africa-detail">130M+ smartphone users. Mobile payments via Flutterwave are mainstream. Jollof rice is not in any major calorie app.</div>
+    </div>
+    <div class="africa-card">
+      <span class="africa-flag">🇪🇹</span>
+      <div class="africa-country">Ethiopia</div>
+      <div class="africa-detail">Fastest-growing mobile market in Africa. Injera, the national staple, exists in zero competitor food databases.</div>
+    </div>
+    <div class="africa-card">
+      <span class="africa-flag">🇰🇪</span>
+      <div class="africa-country">Kenya</div>
+      <div class="africa-detail">65M+ users. M-Pesa-native payments. Ugali and sukuma wiki are daily staples with no nutritional data in any competitor.</div>
+    </div>
+    <div class="africa-card">
+      <span class="africa-flag">🇸🇳</span>
+      <div class="africa-country">Senegal</div>
+      <div class="africa-detail">Thiéboudienne — the national dish, eaten by millions daily — is absent from every mainstream calorie tracker.</div>
+    </div>
+  </div>
+
+  <p>RISE treats these users as the primary audience, not an afterthought. <strong>Hausa proverbs appear in Hausa first.</strong> Ramadan gets a dedicated mode with Suhoor and Iftar meal tracking. Swahili morning quotes appear in Swahili before the English translation. Prices adjust automatically by country — $2.49 per month in Nigeria against $9.99 in the UK.</p>
+
+  <p>This is not charity. These are <strong>large, loyal, underserved audiences</strong> who will be genuinely grateful to finally have a product that knows who they are. And gratitude, in consumer apps, converts to retention.</p>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     THE PRODUCT IN FULL
+══════════════════════════════════════════════════════════ -->
+<section class="section">
+  <span class="eyebrow">The product</span>
+  <h2>What RISE actually<br><em>does</em> every morning</h2>
+
+  <p>Let me walk through this the way a user experiences it — because the list of features does not capture how it feels when all of it works together.</p>
+
+  <div class="reasons">
+    <div class="reason">
+      <h4>The night before — RISE tells you when to go to sleep</h4>
+      <p>Set your wake time once. RISE calculates exactly when you need to be asleep based on your sleep goal and your body's natural rhythm. A bedtime alarm fires at that moment. As you settle, it plays a low-frequency audio tone that guides your brain toward deep sleep. Twenty minutes before your morning alarm, that frequency shifts upward — your brain is already surfacing when the alarm fires. You are not jerked awake from the bottom of a sleep cycle. You meet the alarm on your way up.</p>
+    </div>
+    <div class="reason">
+      <h4>The alarm fires and you cannot dismiss it with a tap</h4>
+      <p>You have to solve a puzzle, or shake the phone, or do a memory game — whatever you chose when you set up the alarm. The difficulty is yours to set. The consequence of failing is your buddy gets a message. You do not get to pretend it did not happen.</p>
+    </div>
+    <div class="reason">
+      <h4>It checks on you 15 minutes later</h4>
+      <p>A gentle follow-up: are you actually awake and moving? If you confirm, great. If you don't, your accountability partner is notified. This single feature — a follow-up check — is something no major competitor has, and it is the most powerful anti-snooze mechanism that exists.</p>
+    </div>
+    <div class="reason">
+      <h4>Optional: put real money on the line</h4>
+      <p>If the user chooses, they can stake real money on their alarm. Link it via BVN (Nigeria's bank verification system) or mobile money. Choose what happens if they don't wake up: the money goes to a charity they selected, or to a friend who also uses RISE. They will not snooze a ₦2,000 stake. Loss aversion is a more reliable alarm than any sound.</p>
+    </div>
+    <div class="reason">
+      <h4>It tracks your life, not just your sleep</h4>
+      <p>Meals. Sleep quality. Daily intentions. Morning tasks. Habit completions. Streaks. All connected. None of it requires manual effort after the first setup. This is the data that makes the weekly review possible.</p>
+    </div>
+    <div class="reason">
+      <h4>At the end of the week, it writes you a letter</h4>
+      <p>Not a dashboard. Not a chart. A letter. Written by an AI that has been watching your patterns all week. It notices that you slept better on nights you didn't eat late. It acknowledges that you missed your workout twice but still maintained your intention streak. It says these things warmly, not clinically. <em>This is the product people subscribe to.</em></p>
+    </div>
+    <div class="reason">
+      <h4>At the end of the month, it writes you a longer one</h4>
+      <p>A personal letter addressed to you by name. About who you were this month based on what you actually did. Not who you planned to be. This monthly letter is the Pro tier. People who receive it once will not stop their subscription.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     THE GUARDIAN PLAN
+══════════════════════════════════════════════════════════ -->
+<section class="section">
+  <span class="eyebrow">A segment nobody is touching</span>
+  <h2>Parents will pay the most.<br><em>Here's why.</em></h2>
+
+  <p>The Guardian plan is simple: <strong>a parent sets the alarm. The child cannot turn it off.</strong> The child has to complete a wake game to dismiss it. The parent is notified when the alarm fires, when it is dismissed, and — critically — when it is not dismissed within a set window.</p>
+
+  <p>This is a product that solves one of the most universally exhausting parts of parenting a school-age child. Every parent in the world has had the argument about not getting up. RISE ends that argument.</p>
+
+  <p>At $6.99–$16.99 per month, it is the highest-value tier in the lineup. And unlike subscription fatigue with entertainment apps, <strong>a parent will not cancel the thing that gets their child to school on time.</strong> Retention in this tier should be exceptional.</p>
+
+  <div class="insight">
+    <span class="insight-icon">👨‍👩‍👧</span>
+    <p>There is no competitor product that does this. Alarmy, Fabulous, Headspace — none of them have a family or Guardian tier. This is a real, paying, motivated audience with a problem that RISE solves completely and exclusively.</p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     THE BUSINESS
+══════════════════════════════════════════════════════════ -->
+<section class="section">
+  <span class="eyebrow">The business model</span>
+  <h2>Simple math that<br><em>actually holds up</em></h2>
+
+  <p>Everything about waking up, tracking your life, and building habits is free. Forever. This is not a trial — it is a genuine commitment, because a large free user base is the foundation of the advertising business and the word-of-mouth engine.</p>
+
+  <p>The paid tiers unlock understanding. The AI that explains your patterns back to you.</p>
+
+  <div class="tiers">
+    <div class="tier-card">
+      <span class="tier-name">Free</span>
+      <span class="tier-price">$0</span>
+      <span class="tier-sub">Forever</span>
+      <p class="tier-desc">Alarm engine, wake games, sleep tracking, food tracker, goals, habits, streaks, quotes. The full becoming layer.</p>
+    </div>
+    <div class="tier-card featured">
+      <span class="tier-name">Core</span>
+      <span class="tier-price">$2.49</span>
+      <span class="tier-sub">per month · lowest market</span>
+      <p class="tier-desc">Weekly AI review. Full sleep history. Sleep-nutrition pattern analysis. The most important tier.</p>
+    </div>
+    <div class="tier-card">
+      <span class="tier-name">Pro</span>
+      <span class="tier-price">$3.99</span>
+      <span class="tier-sub">per month · lowest market</span>
+      <p class="tier-desc">Monthly personal letter, daily AI briefing, smart home lights, deeper analytics.</p>
+    </div>
+    <div class="tier-card">
+      <span class="tier-name">Guardian</span>
+      <span class="tier-price">$6.99</span>
+      <span class="tier-sub">per month · lowest market</span>
+      <p class="tier-desc">Parent controls child's alarm. Child cannot dismiss without proof. Parent is always notified.</p>
+    </div>
+  </div>
+
+  <p style="font-style:italic; color: var(--muted); font-size: 14px; margin-top: -8px;">US/UK/Europe pricing is $5.99 / $9.99 / $16.99. The app detects your country and sets the price automatically.</p>
+
+  <h3>The conversion funnel</h3>
+  <p>Free users who complete their first week see the first paragraph of their personal weekly review in full. The rest is blurred. One button: <em>"Read your full review."</em></p>
+  <p>This is not a trick. It is a demonstration. The first paragraph is already written about them — their actual week, their real patterns. Reading it and wanting more is the most natural thing in the world. <strong>We expect 8–12% of weekly active free users to convert through this mechanic alone.</strong></p>
+
+  <h3>Conservative revenue projections</h3>
+
+  <table class="money-table">
+    <thead>
+      <tr>
+        <th>Monthly Active Users</th>
+        <th>Subscribers at 7%</th>
+        <th>Blended Rev/Sub</th>
+        <th>Annual Revenue</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>100,000</td>
+        <td>7,000</td>
+        <td>$5.40</td>
+        <td class="highlight">~$453K</td>
+      </tr>
+      <tr>
+        <td>500,000</td>
+        <td>35,000</td>
+        <td>$5.40</td>
+        <td class="highlight">~$2.3M</td>
+      </tr>
+      <tr>
+        <td>2,000,000</td>
+        <td>140,000</td>
+        <td>$5.40</td>
+        <td class="highlight">~$9.1M</td>
+      </tr>
+      <tr>
+        <td>5,000,000</td>
+        <td>350,000</td>
+        <td>$5.40</td>
+        <td class="highlight">~$22.7M</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>The $5.40 blended average assumes 60% Core, 30% Pro, 10% Guardian across regional pricing tiers. The advertising revenue from 5 million free users — one editorial sponsor slot per week, never in the morning ritual — adds another $2–3M annually at that scale. <strong>The ads are built and dark. We turn them on when the audience justifies it.</strong></p>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     WHY NOW
+══════════════════════════════════════════════════════════ -->
+<section class="section">
+  <span class="eyebrow">Timing</span>
+  <h2>Three things just became<br><em>true at the same time</em></h2>
+
+  <div class="reasons">
+    <div class="reason">
+      <h4>AI went from expensive to nearly free per user</h4>
+      <p>Eighteen months ago, writing a personalised 400-word weekly review for a million users would have been economically unworkable. Today it costs pennies per user per week. The unit economics that make RISE's core product viable only became possible recently. The window to build this before it becomes crowded is right now.</p>
+    </div>
+    <div class="reason">
+      <h4>African mobile payments finally work at scale</h4>
+      <p>Flutterwave, Paystack, and M-Pesa have solved the payment infrastructure problem that made African subscription businesses impractical before. You can now accept recurring payments in Nigerian Naira, Kenyan Shillings, and Ethiopian Birr without friction. This is new. It is the reason a product built for these markets can actually collect revenue from them.</p>
+    </div>
+    <div class="reason">
+      <h4>The wellness app space is stale and overpriced</h4>
+      <p>Headspace raised $220M. Calm raised $218M. Fabulous raised $40M. All of them charge $12–$70 per year. None of them touch the alarm — the moment where the day actually starts. None of them have built for Africa, South Asia, or the Muslim world as primary audiences. The category is massive, the incumbents are comfortable, and the gap is obvious.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     WHERE WE ARE
+══════════════════════════════════════════════════════════ -->
+<section class="section">
+  <span class="eyebrow">Build status</span>
+  <h2>This is not a concept.<br><em>It is ready to build.</em></h2>
+
+  <p>RISE has a complete engineering blueprint — 12 documents, approximately 190 specified code files, covering every component of the product. An experienced Flutter development team can take this from blueprint to App Store in 3–4 months.</p>
+
+  <p>The blueprint covers the alarm engine with a five-layer failsafe (it fires even in Do Not Disturb, even if the phone is on silent, even if the user tries to kill the app), biometric verification, sleep detection, five wake games with adaptive difficulty, the global food database with African cuisines as first-class entries, the AI reflection system, the payment infrastructure across four regional pricing tiers, smart home integration, and the full onboarding flow including an Assisted mode for elderly users.</p>
+
+  <p><strong>We are not figuring out what to build. We know exactly what to build.</strong> We are looking for the capital to build it and get it in front of people.</p>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     THE ASK
+══════════════════════════════════════════════════════════ -->
+<section class="section">
+  <span class="eyebrow">The investment</span>
+  <h2>What we need<br>and <em>exactly why</em></h2>
+
+  <p>We are raising a seed round. The primary use of capital is user acquisition — getting RISE in front of the people who need it, specifically on Meta, TikTok, and YouTube, where the morning-routine and self-improvement audiences are large, well-targetted, and historically responsive to apps like this.</p>
+
+  <div class="fund-split">
+    <div class="fund-row">
+      <div class="fund-pct">60%</div>
+      <div class="fund-label-col">
+        <div class="fund-name">User Acquisition</div>
+        <div class="fund-note">Paid ads targeting morning routine, self-improvement, faith-based, and parenting audiences</div>
+      </div>
+      <div style="width:120px;">
+        <div class="fund-bar-wrap"><div class="fund-bar" style="width:60%"></div></div>
+      </div>
+    </div>
+    <div class="fund-row">
+      <div class="fund-pct">25%</div>
+      <div class="fund-label-col">
+        <div class="fund-name">Engineering</div>
+        <div class="fund-note">Development team to build from complete blueprint to iOS and Android release</div>
+      </div>
+      <div style="width:120px;">
+        <div class="fund-bar-wrap"><div class="fund-bar" style="width:25%"></div></div>
+      </div>
+    </div>
+    <div class="fund-row">
+      <div class="fund-pct">10%</div>
+      <div class="fund-label-col">
+        <div class="fund-name">Operations</div>
+        <div class="fund-note">Firebase, AI API costs, payment processing, customer support tooling</div>
+      </div>
+      <div style="width:120px;">
+        <div class="fund-bar-wrap"><div class="fund-bar" style="width:10%"></div></div>
+      </div>
+    </div>
+    <div class="fund-row">
+      <div class="fund-pct">5%</div>
+      <div class="fund-label-col">
+        <div class="fund-name">Legal & Compliance</div>
+        <div class="fund-note">App store compliance, payment regulations, basic IP protection</div>
+      </div>
+      <div style="width:120px;">
+        <div class="fund-bar-wrap"><div class="fund-bar" style="width:5%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <p>On the user acquisition front: RISE does not need to convince people they have a morning problem. They already know. They search "how to stop hitting snooze" millions of times a month. The ads do not explain the problem — they just show that RISE exists and that it is different. The audience self-selects. <strong>Someone who watches a 15-second video of an alarm they cannot dismiss with a tap already wants this product.</strong> They just need to know where to find it.</p>
+</section>
+</div><!-- end .container -->
+
+
+<!-- ══════════════════════════════════════════════════════════
+     CLOSING
+══════════════════════════════════════════════════════════ -->
+<div class="closing">
+  <span class="closing-wordmark">RISE</span>
+  <h2 class="closing-headline">
+    The first morning of the rest<br>of your life starts <em>tomorrow.</em>
+  </h2>
+  <div class="closing-divider"></div>
+
+  <p>If any part of this made you think "yes, I can see that working" — we want to talk with you. Not to pitch harder, but to show you the full blueprint, walk you through the key product flows, and answer the hard questions directly.</p>
+
+  <p>We are not looking for the biggest cheque. We are looking for someone who genuinely believes that the people most in need of a great morning — in Lagos, Nairobi, Addis Ababa, Jakarta, and everywhere else the world's app industry has been ignoring — deserve a product built with them in mind.</p>
+
+  <p>RISE is that product. The blueprint exists. The market exists. The moment exists.</p>
+
+  <div class="closing-divider"></div>
+  <span class="closing-conf">Confidential · Not for distribution · March 2026</span>
+</div>
+
+</body>
+</html>
