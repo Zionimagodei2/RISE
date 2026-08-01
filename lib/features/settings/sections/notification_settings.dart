@@ -1,0 +1,4 @@
+import 'package:flutter/material.dart';
+
+class NotificationSettings extends StatefulWidget { const NotificationSettings({super.key}); @override State<NotificationSettings> createState() => _NotificationSettingsState(); }
+class _NotificationSettingsState extends State<NotificationSettings> { bool exactAlarm = true; bool criticalAlerts = true; bool postAlarmWatchdog = true; @override Widget build(BuildContext context) => Card(child: Column(children: [SwitchListTile(title: const Text('Exact alarm permission'), value: exactAlarm, onChanged: (value) => setState(() => exactAlarm = value)), SwitchListTile(title: const Text('Critical alerts'), value: criticalAlerts, onChanged: (value) => setState(() => criticalAlerts = value)), SwitchListTile(title: const Text('Post-alarm watchdog'), value: postAlarmWatchdog, onChanged: (value) => setState(() => postAlarmWatchdog = value))])); }

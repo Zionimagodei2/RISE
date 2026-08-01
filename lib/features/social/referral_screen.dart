@@ -1,0 +1,2 @@
+import 'package:flutter/material.dart';
+class ReferralScreen extends StatelessWidget { const ReferralScreen({super.key}); @override Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Referrals')), body: Padding(padding: const EdgeInsets.all(24), child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [const Text('Invite an accountability buddy.'), const SizedBox(height: 16), FilledButton.icon(onPressed: () {}, icon: const Icon(Icons.share), label: const Text('Share RISE-ACCOUNTABLE'))]))); }

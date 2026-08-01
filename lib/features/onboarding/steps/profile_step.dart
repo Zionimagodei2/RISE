@@ -1,0 +1,2 @@
+import 'package:flutter/material.dart';
+class ProfileStep extends StatelessWidget { const ProfileStep({super.key}); @override Widget build(BuildContext context) => Card(child: Padding(padding: const EdgeInsets.all(20), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: const [Text('Profile', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)), SizedBox(height: 8), Text('Set wake goal, chronotype, and safety preferences.')]))); }

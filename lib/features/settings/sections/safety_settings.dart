@@ -1,0 +1,4 @@
+import 'package:flutter/material.dart';
+
+class SafetySettings extends StatefulWidget { const SafetySettings({super.key}); @override State<SafetySettings> createState() => _SafetySettingsState(); }
+class _SafetySettingsState extends State<SafetySettings> { bool buddyEscalation = true; bool thermalWarnings = true; bool drivingSuppression = true; @override Widget build(BuildContext context) => Card(child: Column(children: [SwitchListTile(title: const Text('Buddy escalation'), value: buddyEscalation, onChanged: (value) => setState(() => buddyEscalation = value)), SwitchListTile(title: const Text('Thermal warnings'), value: thermalWarnings, onChanged: (value) => setState(() => thermalWarnings = value)), SwitchListTile(title: const Text('Driving-aware alarm safety'), value: drivingSuppression, onChanged: (value) => setState(() => drivingSuppression = value))])); }

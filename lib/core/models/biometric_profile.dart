@@ -1,0 +1,1 @@
+class BiometricProfile { const BiometricProfile({required this.userId, this.baselineHeartRate, this.faceLivenessEnabled = true}); final String userId; final int? baselineHeartRate; final bool faceLivenessEnabled; }

@@ -1,0 +1,2 @@
+import 'package:flutter/material.dart';
+class FirstAlarmStep extends StatelessWidget { const FirstAlarmStep({super.key}); @override Widget build(BuildContext context) => Card(child: Padding(padding: const EdgeInsets.all(20), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: const [Text('First alarm', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)), SizedBox(height: 8), Text('Create the first alarm and confirm phone placement.')]))); }

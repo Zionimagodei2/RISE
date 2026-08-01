@@ -1,0 +1,2 @@
+import 'package:flutter/material.dart';
+class WalletScreen extends StatelessWidget { const WalletScreen({super.key}); @override Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Wallet')), body: const Padding(padding: EdgeInsets.all(24), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text('125 proof points', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)), SizedBox(height: 12), Text('Earned from completed alarms and challenges.')]))); }

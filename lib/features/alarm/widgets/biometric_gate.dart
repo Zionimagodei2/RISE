@@ -1,0 +1,2 @@
+import 'package:flutter/material.dart';
+class BiometricGate extends StatelessWidget { const BiometricGate({required this.passed, required this.onPassed, super.key}); final bool passed; final VoidCallback onPassed; @override Widget build(BuildContext context) => Card(child: ListTile(leading: Icon(passed ? Icons.verified : Icons.fingerprint), title: Text(passed ? 'Wake proof passed' : 'Complete wake proof'), subtitle: const Text('Tap to simulate biometric or wake-game success.'), onTap: passed ? null : onPassed)); }

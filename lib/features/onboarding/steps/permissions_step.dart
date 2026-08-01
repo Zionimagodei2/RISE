@@ -1,0 +1,2 @@
+import 'package:flutter/material.dart';
+class PermissionsStep extends StatelessWidget { const PermissionsStep({super.key}); @override Widget build(BuildContext context) => Card(child: Padding(padding: const EdgeInsets.all(20), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: const [Text('Permissions', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)), SizedBox(height: 8), Text('Review alarm, notification, camera, microphone, and background access.')]))); }

@@ -1,0 +1,4 @@
+import 'package:flutter/material.dart';
+
+class AccessibilitySettings extends StatefulWidget { const AccessibilitySettings({super.key}); @override State<AccessibilitySettings> createState() => _AccessibilitySettingsState(); }
+class _AccessibilitySettingsState extends State<AccessibilitySettings> { bool hearingAids = false; bool highContrast = false; bool largeTouchTargets = true; @override Widget build(BuildContext context) => Card(child: Column(children: [SwitchListTile(title: const Text('I use hearing aids'), subtitle: const Text('Preserve Bluetooth hearing-aid routing and maximize vibration/lights.'), value: hearingAids, onChanged: (value) => setState(() => hearingAids = value)), SwitchListTile(title: const Text('High contrast'), value: highContrast, onChanged: (value) => setState(() => highContrast = value)), SwitchListTile(title: const Text('Large touch targets'), value: largeTouchTargets, onChanged: (value) => setState(() => largeTouchTargets = value))])); }

@@ -1,0 +1,2 @@
+import 'package:flutter/material.dart';
+class LeaderboardScreen extends StatelessWidget { const LeaderboardScreen({super.key}); @override Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Leaderboard')), body: ListView(children: const [ListTile(leading: Icon(Icons.emoji_events), title: Text('7-day wake streak'), subtitle: Text('You are ranked #1 locally')), ListTile(leading: Icon(Icons.bedtime), title: Text('Sleep challenge'), subtitle: Text('Complete 5 consistent wake days'))])); }

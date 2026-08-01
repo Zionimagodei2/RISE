@@ -1,0 +1,1 @@
+class UserProfile { const UserProfile({required this.id, required this.displayName, this.usesHearingAids = false, this.guardianMode = false}); final String id; final String displayName; final bool usesHearingAids; final bool guardianMode; }
