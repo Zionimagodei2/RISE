@@ -1,0 +1,2 @@
+import 'package:flutter/material.dart';
+class WakeConfirmationBanner extends StatelessWidget { const WakeConfirmationBanner({required this.onConfirm, super.key}); final VoidCallback onConfirm; @override Widget build(BuildContext context) => Card(child: ListTile(leading: const Icon(Icons.wb_sunny), title: const Text('Wake confirmation pending'), subtitle: const Text('Tap once you are upright and awake.'), trailing: TextButton(onPressed: onConfirm, child: const Text('Confirm')))); }

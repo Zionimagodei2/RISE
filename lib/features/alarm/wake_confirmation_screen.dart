@@ -1,0 +1,2 @@
+import 'package:flutter/material.dart';
+class WakeConfirmationScreen extends StatelessWidget { const WakeConfirmationScreen({super.key}); @override Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Wake confirmation')), body: Padding(padding: const EdgeInsets.all(24), child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [const Text('Confirm you stayed awake after dismissing the alarm.'), const SizedBox(height: 16), FilledButton(onPressed: () => Navigator.of(context).pop(), child: const Text('I am awake'))]))); }

@@ -1,0 +1,1 @@
+class OnboardingState { const OnboardingState({this.step = 0, this.completed = false}); final int step; final bool completed; OnboardingState next() => OnboardingState(step: step + 1, completed: completed); }

@@ -1,0 +1,2 @@
+import 'package:flutter/material.dart';
+class PostDismissScreen extends StatelessWidget { const PostDismissScreen({super.key}); @override Widget build(BuildContext context) => Card(child: ListTile(leading: const Icon(Icons.check_circle), title: const Text('Alarm dismissed'), subtitle: const Text('RISE will watch for sleep relapse and request wake confirmation.'), trailing: TextButton(onPressed: () {}, child: const Text('Confirm')))); }

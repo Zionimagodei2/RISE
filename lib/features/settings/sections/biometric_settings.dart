@@ -1,0 +1,4 @@
+import 'package:flutter/material.dart';
+
+class BiometricSettings extends StatefulWidget { const BiometricSettings({super.key}); @override State<BiometricSettings> createState() => _BiometricSettingsState(); }
+class _BiometricSettingsState extends State<BiometricSettings> { bool faceLiveness = true; bool ppg = true; bool pinFallback = true; @override Widget build(BuildContext context) => Card(child: Column(children: [SwitchListTile(title: const Text('Face liveness wake proof'), value: faceLiveness, onChanged: (value) => setState(() => faceLiveness = value)), SwitchListTile(title: const Text('PPG biometric check'), value: ppg, onChanged: (value) => setState(() => ppg = value)), SwitchListTile(title: const Text('Two-failure PIN fallback'), value: pinFallback, onChanged: (value) => setState(() => pinFallback = value))])); }

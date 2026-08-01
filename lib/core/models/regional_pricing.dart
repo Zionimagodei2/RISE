@@ -1,0 +1,1 @@
+class RegionalPricing { const RegionalPricing({required this.regionCode, required this.currencyCode, required this.monthlyPrice}); final String regionCode; final String currencyCode; final double monthlyPrice; }

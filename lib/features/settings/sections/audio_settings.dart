@@ -1,0 +1,4 @@
+import 'package:flutter/material.dart';
+
+class AudioSettings extends StatefulWidget { const AudioSettings({super.key}); @override State<AudioSettings> createState() => _AudioSettingsState(); }
+class _AudioSettingsState extends State<AudioSettings> { bool forceSpeaker = true; double volume = 0.4; @override Widget build(BuildContext context) => Card(child: Column(children: [SwitchListTile(title: const Text('Force phone speaker'), subtitle: const Text('Mirrors alarms to the onboard speaker for wired, Bluetooth, and cast routes.'), value: forceSpeaker, onChanged: (value) => setState(() => forceSpeaker = value)), ListTile(title: const Text('Initial alarm volume'), subtitle: Slider(value: volume, min: 0.4, max: 1, divisions: 6, label: '${(volume * 100).round()}%', onChanged: (value) => setState(() => volume = value))) ])); }

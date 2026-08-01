@@ -1,0 +1,4 @@
+import 'package:flutter/material.dart';
+
+class SleepSettings extends StatefulWidget { const SleepSettings({super.key}); @override State<SleepSettings> createState() => _SleepSettingsState(); }
+class _SleepSettingsState extends State<SleepSettings> { bool motion = true; bool microphone = false; bool relapseDetection = true; @override Widget build(BuildContext context) => Card(child: Column(children: [SwitchListTile(title: const Text('Motion sleep detection'), value: motion, onChanged: (value) => setState(() => motion = value)), SwitchListTile(title: const Text('Microphone sleep cues'), value: microphone, onChanged: (value) => setState(() => microphone = value)), SwitchListTile(title: const Text('Post-dismiss relapse detection'), value: relapseDetection, onChanged: (value) => setState(() => relapseDetection = value))])); }

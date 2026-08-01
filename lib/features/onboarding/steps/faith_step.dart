@@ -1,0 +1,2 @@
+import 'package:flutter/material.dart';
+class FaithStep extends StatelessWidget { const FaithStep({super.key}); @override Widget build(BuildContext context) => Card(child: Padding(padding: const EdgeInsets.all(20), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: const [Text('Faith and motivation', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)), SizedBox(height: 8), Text('Choose whether quotes and spiritual prompts appear.')]))); }

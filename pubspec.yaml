@@ -1,0 +1,18 @@
+name: rise
+version: 0.1.0+1
+description: RISE AI alarm clock for iOS and Android.
+publish_to: none
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_riverpod: ^2.5.1
+  intl: ^0.19.0
+  uuid: ^4.4.0
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+flutter:
+  uses-material-design: true

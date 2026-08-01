@@ -1,0 +1,2 @@
+import 'package:flutter/material.dart';
+class TierCard extends StatelessWidget { const TierCard({required this.name, required this.description, required this.selected, required this.onTap, super.key}); final String name; final String description; final bool selected; final VoidCallback onTap; @override Widget build(BuildContext context) => Card(child: ListTile(selected: selected, leading: Icon(selected ? Icons.check_circle : Icons.circle_outlined), title: Text(name), subtitle: Text(description), onTap: onTap)); }

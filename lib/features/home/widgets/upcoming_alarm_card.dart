@@ -1,0 +1,2 @@
+import 'package:flutter/material.dart';
+class UpcomingAlarmCard extends StatelessWidget { const UpcomingAlarmCard({required this.timeLabel, required this.onTap, super.key}); final String timeLabel; final VoidCallback onTap; @override Widget build(BuildContext context) => Card(child: ListTile(leading: const Icon(Icons.alarm), title: Text(timeLabel), subtitle: const Text('Next resilient alarm'), onTap: onTap)); }
